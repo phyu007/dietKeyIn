@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import DietInput from './DietInput'
 import DietList from './DietList'
-import { postDiet } from '../../api/apiClient'
+import { postDiet } from '../../api/urineAnalysis'
 
 const Diet = (props) => {
     const [dietList, setDietList] = useState([])
