@@ -3,7 +3,7 @@ import DietItem from './DietItem'
 
 const DietList = ({ dietList }) => {
     const generateDietList = dietList => {
-        return dietList.map(diet => <DietItem diet={diet} />)
+        return dietList.map(diet => <DietItem diet={diet} key={diet}/>)
     }
 
     return (

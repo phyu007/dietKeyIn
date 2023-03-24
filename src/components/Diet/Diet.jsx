@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import DietInput from './DietInput'
 import DietList from './DietList'
 import { postDiet } from '../../api/urineAnalysis'
+import insert from '../../api/backend';
 
 const Diet = (props) => {
     const [dietList, setDietList] = useState([])
@@ -16,7 +17,8 @@ const Diet = (props) => {
         if (dietList.length == 0)
             return console.error('Diet list is empty!')
         try {
-            await postDiet(dietList)
+            //await postDiet(dietList)
+            console.log("This is dietlist",dietList)
         } catch (eInfo) {
             console.error(eInfo)
         }
