@@ -8,6 +8,7 @@ import { Redirect, Link } from "react-router-dom";
 import base64 from "react-native-base64";
 import { Formik } from "formik";
 import { validateName, validatePassword } from "../../validations/validations";
+import { login } from '../../api/urineAnalysis'
 
 class LogIn extends React.Component {
   constructor(props) {
@@ -17,7 +18,35 @@ class LogIn extends React.Component {
     };
   }
 
+  
+
   render() {
+
+    const handleSubmit = async (userName,password) => {
+   
+     console.log("userName " + userName)
+     console.log("password " + password)
+      const body = {
+        "username": userName,
+        "password": password
+      }
+
+      console.log(
+        "body " + body
+      )
+
+      let response = await login(body)
+      console.log("This is response " + response)
+  
+      if (response.ok) {
+        const user = await response.json();
+        localStorage.setItem('user', JSON.stringify(user));
+        console.log(user.id);
+      } else {
+        console.error('Error logging in');
+      }
+    };
+
     return (
       <div>
         <Formik
@@ -46,6 +75,8 @@ class LogIn extends React.Component {
               const localUname = (userObj && userObj.userName) || null;
               const localUpwd =
                 (userObj && base64.decode(userObj.password)) || null;
+
+                console.log(localUname, localUpwd)
 
               if (
                 values.userName === "abc" &&
@@ -77,7 +108,7 @@ class LogIn extends React.Component {
                     aria-labelledby="pills-signin-tab"
                   >
                     <div className="col-sm-12 border border-primary shadow rounded pt-2">
-                      <form onSubmit={props.handleSubmit}>
+                      <form onSubmit={handleSubmit(props.values.userName,props.values.password)}>
                         <div className="form-group">
                           <label className="font-weight-bold">
                             Username <span className="text-danger">*</span>

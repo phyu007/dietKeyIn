@@ -2,11 +2,23 @@ import React, { useState } from 'react'
 import DietInput from './DietInput'
 import DietList from './DietList'
 import { postDiet } from '../../api/urineAnalysis'
+import { getPredictedPH } from '../../api/urineAnalysis'
 import insert from '../../api/backend';
+import data from '../../mockdata/data'
+
 
 const Diet = (props) => {
     const [dietList, setDietList] = useState([])
+    const[ initialValues] = useState(data)
 
+    const updatedValues = {...initialValues};
+
+    dietList.forEach(item => {
+        if (updatedValues.hasOwnProperty(item.foodName)) {
+          updatedValues[item.foodName] += Number(item.quantity);
+        }
+      });
+      
     const addDiet = (diet) => {
         let tempDietList = dietList.slice()
         tempDietList.push(diet)
@@ -18,7 +30,10 @@ const Diet = (props) => {
             return console.error('Diet list is empty!')
         try {
             //await postDiet(dietList)
-            console.log("This is dietlist",dietList)
+            let response = await getPredictedPH(updatedValues)
+            console.log("This is predicted PH",response.data.predicted_urine_ph)
+            //console.log("This is after initValues",updatedValues)
+            //console.log("This is dietlist",dietList)
         } catch (eInfo) {
             console.error(eInfo)
         }

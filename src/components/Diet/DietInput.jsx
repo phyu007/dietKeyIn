@@ -6,18 +6,14 @@ const DietInput = ({ addDiet }) => {
     const [quantity, setQuantity] = useState(0)
     const [temperature, setTemperature] = useState(0)
     const[ initialValues] = useState(data)
-    let values = initialValues
+
 
     const handleFoodNameChange = (event) => { setFoodName(event.target.value) }
     const handleQuantityChange = (event) => { setQuantity(event.target.value) }
     const handleTempChange = (event) => { setTemperature(event.target.value) }
-    console.log("This is initialValues before submit",initialValues)
 
     const handleSubmit = event => {
         event.preventDefault()
-        console.log(foodName, quantity)
-        values = setIniQuantity(foodName,quantity,values);
-        console.log("This is initialValues after submit",values)
 
         addDiet({
             foodName,
@@ -26,19 +22,6 @@ const DietInput = ({ addDiet }) => {
             datetime: new Date()
         })
     }
-    const setIniQuantity = (foodName, amount, values) => {
-        const updatedValues = { ...values };
-        Object.keys(updatedValues).forEach((key) => {
-          if (key === foodName) {
-            console.log("This is foodname",foodName)
-            console.log("This is key",key)
-            console.log("This is amount",amount )
-            updatedValues[key] = amount;
-          }
-        });
-        console.log("This is updatedValues",updatedValues)
-        return updatedValues;
-      };
 
     return (
         <form onSubmit={handleSubmit}>
