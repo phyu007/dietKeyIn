@@ -93,7 +93,7 @@ class DashBoard extends React.Component {
           <Diet />
         </div>
         {!this.state.submit ? <Redirect to={`/`} /> : null}
-        {this.state.logout ? (
+        {/* {this.state.logout ? (
           <SweetAlert
             warning
             showCancel
@@ -106,7 +106,7 @@ class DashBoard extends React.Component {
           ></SweetAlert>
         ) : (
           ""
-        )}
+        )} */}
 
         {/* <nav className="navbar navbar-expand-md bg-dark navbar-dark">
           <a className="navbar-brand" href="#">
