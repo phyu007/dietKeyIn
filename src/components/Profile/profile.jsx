@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory,useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import './ProfileSelection.css'; // Import the CSS file
 
 const ProfileSelectionPage = () => {
@@ -7,7 +7,7 @@ const ProfileSelectionPage = () => {
   const location = useLocation();
   const { userName, loggedInUserObj } = location.state;
 
-  
+
 
   // define profiles array (can be fetched from API or database)
   const profiles = [
@@ -20,7 +20,7 @@ const ProfileSelectionPage = () => {
   const handleProfileSelect = (profile) => {
     // save selected profile to localStorage or server
     console.log(`Selected profile: ${profile.name}`);
-    console.log("from login " + {userName},{loggedInUserObj})
+    console.log("from login " + { userName }, { loggedInUserObj })
     const userObj = {
       userName: userName,
       firstName: profile.name,
@@ -35,18 +35,18 @@ const ProfileSelectionPage = () => {
 
   return (
     <div className="profile-selection-page"
-    style={{ display: 'flex', flexWrap : 'wrap',alignItems :'center',justifyContent:'center',flexDirection:'column',  height:'100vh'}}
+      style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', height: '100vh' }}
     >
       <h1>Select your profile</h1>
       <div className="profiles-list"
-      style={{ display: 'flex', flexWrap : 'wrap',justifyContent:'center'}} >
+        style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }} >
         {profiles.map((profile) => (
           <div
             className="profile-item"
             key={profile.name}
             onClick={() => handleProfileSelect(profile)}
           >
-          <img src={profile.avatar} alt={profile.name} style={{ width: '200px', height: '200px',borderRadius : '50%' ,marginRight : '10px' }} />
+            <img src={profile.avatar} alt={profile.name} style={{ cursor: "pointer", width: '200px', height: '200px', borderRadius: '50%', marginRight: '10px' }} />
             <p>{profile.name}</p>
           </div>
         ))}
