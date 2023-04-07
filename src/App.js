@@ -8,7 +8,6 @@ import DashBoard from "./components/DashBoard/DashBoard";
 import Register from "./components/Register/Register";
 import { ProtectedRoute } from "./ProtectedRoute";
 import Page404 from "./components/Page404/Page404";
-import AboutApp from "./components/AboutApp/AboutApp";
 import ProfileSelectionPage from "./components/Profile/profile";
 
 
