@@ -9,6 +9,8 @@ import Register from "./components/Register/Register";
 import { ProtectedRoute } from "./ProtectedRoute";
 import Page404 from "./components/Page404/Page404";
 import AboutApp from "./components/AboutApp/AboutApp";
+import ProfileSelectionPage from "./components/Profile/profile";
+
 
 function App() {
   return (
@@ -18,11 +20,11 @@ function App() {
           <Route path="/" exact component={LogIn} />
           <Route path="/register" exact component={Register} />
           <ProtectedRoute exact path="/dashboard" component={DashBoard} />
+          <Route path="/profiles" component={ProfileSelectionPage} />
           <Route path="*" component={Page404} />
           
         </Switch>
       </Router>
-      <AboutApp />
     </div>
   );
 }
