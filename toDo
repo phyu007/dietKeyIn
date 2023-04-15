@@ -4,11 +4,15 @@ Determine when to train ML model with the new inputs -done
 
 8 apr 2023
 lambda for list of profiles in the same household 
-Trigger predictPH from insertDiet
-Tigger model from sensor input
-Write function to always check for the inserts row in one table and update the another table 
-That same function can trigger the model to re-train again 
+Trigger predictPH from insertDiet - done 
+Tigger model from sensor input - 
+Write function to always check for the inserts row in one table and update the another table - done 
+That same function can trigger the model to re-train again -done
+how to update s3 bucket joblib after retrained?
+set the periodic table how to retrain - retrain every 24 hrs 
 
 9 apr 2023 
+give person_id from FE to backend 
 Take os from pi and containerised 
+requirement gathering 
 

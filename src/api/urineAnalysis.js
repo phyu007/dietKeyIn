@@ -15,7 +15,7 @@ export const getAllUrineAnalysisResults = async () => {
 
 export const postDiet = async (dietList) => {
   console.log("This dietlist posted", dietList);
-  return await axiosClient.post("/insertUrine", dietList);
+  return await axiosClient.post("/insertDiet", dietList);
 };
 
 export const getPredictedPH = async (dietList) => {

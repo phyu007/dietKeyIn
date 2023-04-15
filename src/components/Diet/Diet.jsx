@@ -29,9 +29,9 @@ const Diet = (props) => {
         if (dietList.length == 0)
             return console.error('Diet list is empty!')
         try {
-            //await postDiet(dietList)
+            await postDiet(updatedValues)
             let response = await getPredictedPH(updatedValues)
-            console.log("This is predicted PH",response.data.predicted_urine_ph)
+            console.log("This is predicted PH",response.data.body.predi)
             //console.log("This is after initValues",updatedValues)
             //console.log("This is dietlist",dietList)
         } catch (eInfo) {
