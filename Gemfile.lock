@@ -69,7 +69,6 @@ DEPENDENCIES
   addressable (= 2.7.0)
   jekyll (= 4.2.1)
   jekyll-theme-cayman (= 0.2.0)
-  public_suffix (>= 2.0.2, < 5.0)
 
 BUNDLED WITH
    2.4.12
