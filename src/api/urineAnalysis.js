@@ -26,3 +26,10 @@ export const login = async (credentials) => {
   console.log("These are credentials", credentials)
   return await axiosClient.post("/login", credentials);
 };
+
+export const getfamilymembers = async (account_id) => {
+  console.log("This is account_id", account_id)
+  const response = await axiosClient.post("/getfamilymembers", account_id);
+  console.log("This is response", response.data.body);
+  return response.data.body;
+};

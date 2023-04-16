@@ -27,14 +27,16 @@ function LoginForm() {
       console.log("This is response", response);
 
       if (response.data.statusCode === 200) {
-        console.log("Success logging in");
+        console.log("Success logging in",response);
         const userObj = {
           userName: username,
           firstName: response.data.firstName,
           lastName: response.data.lastName,
+          id : response.data.body.id,
           isUserLoggedIn: true,
         };
         localStorage.setItem(username, JSON.stringify(userObj));
+        console.log()
         //setLoggedInUserObj(userObj);
         history.push({
           pathname: "/profiles",
