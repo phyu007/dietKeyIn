@@ -3,7 +3,6 @@ import DietInput from './DietInput'
 import DietList from './DietList'
 import { postDiet } from '../../api/urineAnalysis'
 import { getPredictedPH } from '../../api/urineAnalysis'
-import insert from '../../api/backend';
 import data from '../../mockdata/data'
 
 
