@@ -9,7 +9,7 @@ const ToiletUsersPage = () => {
   const { userName, loggedInUserObj } = location.state;
   const [familyMem, setFamilyMem] = useState([]);
 
-  console.log("from login " + { userName }, { loggedInUserObj })
+  console.log("from welcome " , { loggedInUserObj })
   //console.log("account id " +  loggedInUserObj.id)
 
 
@@ -17,7 +17,7 @@ useEffect(() => {
   async function getFamilyMembers() {
     let id = {"account_id": loggedInUserObj.id}
     const response  = await getfamilymembers(id);  
-    console.log("response " , response)
+    console.log("this is family members " , response)
     setFamilyMem(response);
   
   }

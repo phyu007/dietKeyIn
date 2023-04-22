@@ -37,12 +37,13 @@ useEffect(() => {
       userName: userName,
       firstName: profile.name,
       isUserLoggedIn: true,
+      id : loggedInUserObj.id,
     };
     localStorage.setItem(loggedInUserObj.userName, JSON.stringify(userObj));
     if(profile.name === "Diet Key In"){
       history.push({
         pathname: "/profiles",
-        state: { loggedInUserObj: userObj, userName: userName },
+        state: { loggedInUserObj: userObj, userName: userObj.userName },
       });
     }
     if(profile.name == "Toilet Users"){
