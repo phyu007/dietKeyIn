@@ -39,7 +39,7 @@ function LoginForm() {
         console.log()
         //setLoggedInUserObj(userObj);
         history.push({
-          pathname: "/profiles",
+          pathname: "/welcome",
           state: { loggedInUserObj: userObj, userName: username },
         });
       } else {

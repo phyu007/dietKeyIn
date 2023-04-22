@@ -9,6 +9,9 @@ import Register from "./components/Register/Register";
 import { ProtectedRoute } from "./ProtectedRoute";
 import Page404 from "./components/Page404/Page404";
 import ProfileSelectionPage from "./components/Profile/profile";
+import WelcomePage from "./components/Welcome/welcome";
+import ToiletUsersPage from "./components/ToiletUsers/toiletUsers";
+
 
 
 function App() {
@@ -20,6 +23,8 @@ function App() {
           <Route path="/register" exact component={Register} />
           <ProtectedRoute exact path="/dashboard" component={DashBoard} />
           <ProtectedRoute path="/profiles" component={ProfileSelectionPage} />
+          <ProtectedRoute path="/welcome" component={WelcomePage} />
+          <ProtectedRoute path="/toiletUsers" component={ToiletUsersPage} />
           <Route path="*" component={Page404} />
           
         </Switch>

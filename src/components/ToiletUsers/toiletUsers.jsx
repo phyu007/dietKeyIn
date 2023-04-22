@@ -1,9 +1,9 @@
 import React, { useEffect,useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import './ProfileSelection.css'; // Import the CSS file
+import './toiletUsers.css'; // Import the CSS file
 import { getfamilymembers } from "../../api/urineAnalysis";
 
-const ProfileSelectionPage = () => {
+const ToiletUsersPage = () => {
   const history = useHistory();
   const location = useLocation();
   const { userName, loggedInUserObj } = location.state;
@@ -85,4 +85,4 @@ if (familyMem && familyMem.length > 0) {
   );
 };
 
-export default ProfileSelectionPage;
+export default ToiletUsersPage;

@@ -1,52 +1,36 @@
 import React, { useEffect,useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import './ProfileSelection.css'; // Import the CSS file
+import './welcome.css'; // Import the CSS file
 import { getfamilymembers } from "../../api/urineAnalysis";
 
-const ProfileSelectionPage = () => {
+const WelcomePage = () => {
   const history = useHistory();
   const location = useLocation();
   const { userName, loggedInUserObj } = location.state;
-  const [familyMem, setFamilyMem] = useState([]);
 
   console.log("from login " + { userName }, { loggedInUserObj })
-  //console.log("account id " +  loggedInUserObj.id)
+  console.log("account id " +  loggedInUserObj.id)
 
 
 useEffect(() => {
   async function getFamilyMembers() {
     let id = {"account_id": loggedInUserObj.id}
-    const response  = await getfamilymembers(id);  
-    console.log("response " , response)
-    setFamilyMem(response);
-  
+    const response  = await getfamilymembers(id);    
   }
     getFamilyMembers();
 }, [loggedInUserObj.id]);
 
   // define profiles array (can be fetched from API or database)
   let profiles = [
-    { name: "John", avatar: "https://images.unsplash.com/photo-1593085512500-5d55148d6f0d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y2FydG9vbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" },
-    { name: "Sarah", avatar: "https://images.unsplash.com/photo-1578632749014-ca77efd052eb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGFuaW1lfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" },
-    { name: "Alex", avatar: "https://images.unsplash.com/photo-1611457194403-d3aca4cf9d11?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80" },
-    { name : "NiNi" , avatar: "https://images.unsplash.com/photo-1639628735078-ed2f038a193e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fGNhcnRvb258ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"},
-    { name : "David" , avatar: "https://images.unsplash.com/photo-1620428268482-cf1851a36764?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Y2FydG9vbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"},
+    { name: "Toilet Users", avatar: "https://images.unsplash.com/photo-1613743147091-122703615c97?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8dG9pbGV0JTIwdXNlcnMlMjBjYXJ0b29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60" },
+    { name: "Diet Key In", avatar: "https://images.unsplash.com/photo-1531928351158-2f736078e0a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGRpZXQlMjBwaWN0dXJlJTIwY2FydG9vbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=700&q=60" },
   ];
-
-  // If family members exist, replace the profiles array with a new array
-// containing the family members' names and avatars
-if (familyMem && familyMem.length > 0) {
-  profiles = familyMem.map((member,index) => ({
-    name: member.person_name,
-    avatar: profiles[index].avatar,
-  }));
-}
 
 
   // handle profile selection
   const handleProfileSelect = (profile) => {
     // save selected profile to localStorage or server
-    console.log(`Selected profile: ${profile.name}`);
+    console.log(`Selected option: ${profile.name}`);
     console.log("from login " + { userName }, { loggedInUserObj })
     
     const userObj = {
@@ -55,10 +39,19 @@ if (familyMem && familyMem.length > 0) {
       isUserLoggedIn: true,
     };
     localStorage.setItem(loggedInUserObj.userName, JSON.stringify(userObj));
-    history.push({
-      pathname: "/dashboard",
-      state: { userName: loggedInUserObj.userName },
-    });
+    if(profile.name === "Diet Key In"){
+      history.push({
+        pathname: "/profiles",
+        state: { loggedInUserObj: userObj, userName: userName },
+      });
+    }
+    if(profile.name == "Toilet Users"){
+      history.push({
+        pathname: "/toiletUsers",
+        state: { loggedInUserObj: userObj, userName: userName },
+      });
+    }
+
   };
 
   return (
@@ -66,7 +59,7 @@ if (familyMem && familyMem.length > 0) {
     <div className="profile-selection-page"
       style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', height: '100vh' }}
     >
-      <h1>Select your profile</h1>
+      <h1>Welcome</h1>
       <div className="profiles-list"
         style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }} >
         {profiles.map((profile) => (
@@ -85,4 +78,4 @@ if (familyMem && familyMem.length > 0) {
   );
 };
 
-export default ProfileSelectionPage;
+export default WelcomePage;

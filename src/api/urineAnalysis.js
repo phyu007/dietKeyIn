@@ -33,3 +33,10 @@ export const getfamilymembers = async (account_id) => {
   console.log("This is response", response.data.body);
   return response.data.body;
 };
+
+export const insertDummiesPHtemp = async (account_id,person_id) => {
+  console.log("This is account_id", account_id)
+  const response = await axiosClient.post("/getfamilymembers", account_id);
+  console.log("This is response", response.data.body);
+  return response.data.body;
+};
