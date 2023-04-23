@@ -1,0 +1,6 @@
+.profile-image {
+    height: 100px; /* Change to whatever size you want */
+    width: auto; /* Keeps the aspect ratio of the image */
+    border-radius: 50%; /* Makes the image a circle */
+    margin-right: 10px; /* Adds some spacing between the image and the name */
+  }

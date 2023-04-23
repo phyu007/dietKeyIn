@@ -50,14 +50,15 @@ if (familyMem && familyMem.length > 0) {
     console.log("from login " + { userName }, { loggedInUserObj })
     
     const userObj = {
-      userName: userName,
-      firstName: profile.name,
+      userName: profile.name,
       isUserLoggedIn: true,
     };
     localStorage.setItem(loggedInUserObj.userName, JSON.stringify(userObj));
+    console.log("toiletUsers loggedInUserObj",loggedInUserObj)
+    let tempDeviceID = "123"
     history.push({
-      pathname: "/dashboard",
-      state: { userName: loggedInUserObj.userName },
+      pathname: "/toiletDashboard?deviceId=" + tempDeviceID,
+      state: { loggedInUserObj: userObj ,userName: loggedInUserObj.userName },
     });
   };
 

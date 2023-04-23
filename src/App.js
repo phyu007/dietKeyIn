@@ -11,9 +11,7 @@ import Page404 from "./components/Page404/Page404";
 import ProfileSelectionPage from "./components/Profile/profile";
 import WelcomePage from "./components/Welcome/welcome";
 import ToiletUsersPage from "./components/ToiletUsers/toiletUsers";
-
-
-
+import ToiletDashboardPage from "./components/ToiletDashboard/ToiletDashboard";
 function App() {
   return (
     <div>
@@ -25,8 +23,11 @@ function App() {
           <ProtectedRoute path="/profiles" component={ProfileSelectionPage} />
           <ProtectedRoute path="/welcome" component={WelcomePage} />
           <ProtectedRoute path="/toiletUsers" component={ToiletUsersPage} />
+          <ProtectedRoute
+            path="/toiletDashboard"
+            component={ToiletDashboardPage}
+          />
           <Route path="*" component={Page404} />
-          
         </Switch>
       </Router>
     </div>
