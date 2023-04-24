@@ -11,6 +11,7 @@
     "bootstrap": "^4.4.1",
     "formik": "^2.1.4",
     "jquery": "3.4.1",
+    "js-cookie": "^3.0.4",
     "lodash": "^4.17.15",
     "mysql": "^2.18.1",
     "popper.js": "^1.16.1",

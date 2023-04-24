@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { login } from "../../api/urineAnalysis";
 import { useHistory } from "react-router-dom";
 import { Redirect, Link } from "react-router-dom";
+import Cookies from 'js-cookie';
 import {
   ToastsContainer,
   ToastsStore,
@@ -13,6 +14,16 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const history = useHistory();
   const [loggedInUserObj, setLoggedInUserObj] = useState(null);
+
+  const cookieUserName = Cookies.get('UserName');
+  const userObj = Cookies.get('UserObj');
+  if(cookieUserName != null){  
+    localStorage.setItem(cookieUserName, userObj); 
+    history.push({
+      pathname: "/toiletUsers/?deviceid=12345",
+      state: { loggedInUserObj: userObj, userName: cookieUserName },
+    });
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -38,6 +49,8 @@ function LoginForm() {
         localStorage.setItem(username, JSON.stringify(userObj));
         console.log()
         //setLoggedInUserObj(userObj);
+        Cookies.set('UserName', username);
+        Cookies.set('UserObj', JSON.stringify(userObj));
         history.push({
           pathname: "/welcome",
           state: { loggedInUserObj: userObj, userName: username },
