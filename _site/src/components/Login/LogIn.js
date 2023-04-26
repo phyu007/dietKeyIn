@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { login } from "../../api/urineAnalysis";
 import { useHistory } from "react-router-dom";
 import { Redirect, Link } from "react-router-dom";
+import Cookies from 'js-cookie';
 import {
   ToastsContainer,
   ToastsStore,
@@ -37,6 +38,8 @@ function LoginForm() {
         };
         localStorage.setItem(username, JSON.stringify(userObj));
         console.log()
+        Cookies.set('UserName', username);
+        Cookies.set('UserObj', JSON.stringify(userObj));
         //setLoggedInUserObj(userObj);
         history.push({
           pathname: "/profiles",
