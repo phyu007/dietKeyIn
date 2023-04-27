@@ -12,7 +12,7 @@ import ProfileSelectionPage from "./components/Profile/profile";
 import WelcomePage from "./components/Welcome/welcome";
 import ToiletUsersPage from "./components/ToiletUsers/toiletUsers";
 import ToiletDashboardPage from "./components/ToiletDashboard/ToiletDashboard";
-function App() {
+function App() {  
   return (
     <div>
       <Router>
@@ -22,7 +22,7 @@ function App() {
           <ProtectedRoute exact path="/dashboard" component={DashBoard} />
           <ProtectedRoute path="/profiles" component={ProfileSelectionPage} />
           <ProtectedRoute path="/welcome" component={WelcomePage} />
-          <ProtectedRoute path="/toiletUsers" component={ToiletUsersPage} />
+          <Route path="/toiletUsers" component={ToiletUsersPage} />
           <ProtectedRoute
             path="/toiletDashboard"
             component={ToiletDashboardPage}

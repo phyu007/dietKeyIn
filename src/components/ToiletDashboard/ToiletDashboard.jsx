@@ -7,17 +7,15 @@ const ToiletDashboardPage = () => {
   const location = useLocation();
   const { userName, loggedInUserObj } = location.state;
 
-  const queryParams = new URLSearchParams(location.search);
-    // Access individual query parameters by calling .get() method on queryParams object
-  const deviceId = queryParams.get('deviceId');
-  console.log("this is deviceID",deviceId); // ▶ URLSearchParams {}
+  
 
-
+  const searchParams = new URLSearchParams(window.location.search);
+  const deviceid = searchParams.get('deviceid');
 
 
 
   return (
-   <p>hello from toiletDashboard - {loggedInUserObj.userName}</p>
+   <p>Waiting Result  {loggedInUserObj.userName}</p>
   );
 };
 

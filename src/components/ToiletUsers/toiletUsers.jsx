@@ -2,13 +2,16 @@ import React, { useEffect,useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import './toiletUsers.css'; // Import the CSS file
 import { getfamilymembers } from "../../api/urineAnalysis";
+import { insertDummiesPHtemp } from "../../api/urineAnalysis";
+import Cookies from 'js-cookie';
 
 const ToiletUsersPage = () => {
   const history = useHistory();
   const location = useLocation();
-  const { userName, loggedInUserObj } = location.state;
+  //const { userName, loggedInUserObj } = location.state;
   const [familyMem, setFamilyMem] = useState([]);
-
+  const userName = Cookies.get('UserName');
+  const loggedInUserObj = JSON.parse(Cookies.get('UserObj'));
   console.log("from welcome " , { loggedInUserObj })
   //console.log("account id " +  loggedInUserObj.id)
 
@@ -22,8 +25,7 @@ useEffect(() => {
   
   }
     getFamilyMembers();
-}, [loggedInUserObj.id]);
-
+}, [loggedInUserObj.id]); 
   // define profiles array (can be fetched from API or database)
   let profiles = [
     { name: "John", avatar: "https://images.unsplash.com/photo-1593085512500-5d55148d6f0d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y2FydG9vbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" },
@@ -38,28 +40,64 @@ useEffect(() => {
 if (familyMem && familyMem.length > 0) {
   profiles = familyMem.map((member,index) => ({
     name: member.person_name,
+    guid: member.guid,
+    account_id: member.account_id,
     avatar: profiles[index].avatar,
   }));
+  console.log(profiles);
 }
 
-
+ 
   // handle profile selection
-  const handleProfileSelect = (profile) => {
+  const handleProfileSelect = async ( profile) => {
+   
     // save selected profile to localStorage or server
-    console.log(`Selected profile: ${profile.name}`);
+    console.log(`Selected profile:`);
+    console.log(profile);
     console.log("from login " + { userName }, { loggedInUserObj })
     
-    const userObj = {
-      userName: profile.name,
-      isUserLoggedIn: true,
-    };
-    localStorage.setItem(loggedInUserObj.userName, JSON.stringify(userObj));
-    console.log("toiletUsers loggedInUserObj",loggedInUserObj)
-    let tempDeviceID = "123"
-    history.push({
-      pathname: "/toiletDashboard?deviceId=" + tempDeviceID,
-      state: { loggedInUserObj: userObj ,userName: loggedInUserObj.userName },
-    });
+    const body = {
+      account_id: profile.account_id,
+      person_guid: profile.guid,
+    }; 
+
+      try {
+        const response = await insertDummiesPHtemp(body);
+        console.log("This is response", response);
+  
+        if (response.data.statusCode === 200) {
+          console.log("Success logging in",response);
+          const userObj = {
+            userName: profile.name,
+            isUserLoggedIn: true,
+          };
+          localStorage.setItem(loggedInUserObj.userName, JSON.stringify(userObj));
+          console.log("toiletUsers loggedInUserObj",loggedInUserObj)
+          const searchParams = new URLSearchParams(window.location.search);
+          const deviceid = searchParams.get('deviceId');
+          history.push({
+            pathname: "/toiletDashboard/?deviceId=" + deviceid,
+            state: { loggedInUserObj: userObj ,userName: loggedInUserObj.userName },
+          });
+        } else {
+          console.error("Error logging in"); 
+  
+        }
+      } catch (error) {
+        console.error("Error logging in", error); 
+        const userObj = {
+          userName: profile.name,
+          isUserLoggedIn: true,
+        };
+        localStorage.setItem(loggedInUserObj.userName, JSON.stringify(userObj));
+        console.log("toiletUsers loggedInUserObj",loggedInUserObj)
+        const searchParams = new URLSearchParams(window.location.search);
+        const deviceid = searchParams.get('deviceid');
+        history.push({
+          pathname: "/toiletDashboard/?deviceId=" + deviceid,
+          state: { loggedInUserObj: userObj ,userName: loggedInUserObj.userName },
+        });
+      } 
   };
 
   return (
@@ -67,10 +105,11 @@ if (familyMem && familyMem.length > 0) {
     <div className="profile-selection-page"
       style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', height: '100vh' }}
     >
-      <h1>Select your profile</h1>
+     
       <div className="profiles-list"
         style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }} >
         {profiles.map((profile) => (
+          
           <div
             className="profile-item"
             key={profile.name}
@@ -83,6 +122,8 @@ if (familyMem && familyMem.length > 0) {
         ))}
       </div>
     </div>
+    
+
   );
 };
 
