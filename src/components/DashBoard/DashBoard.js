@@ -10,6 +10,7 @@ class DashBoard extends React.Component {
     super(props);
     this.state = {
       username: this.props.name,
+      user : this.props.user,
       board: [],
       boardItem: "",
       toggle: false,
@@ -46,6 +47,7 @@ class DashBoard extends React.Component {
   }
 
   render() {
+    console.log("This is user", this.state.loggedInUserObj)
     const localUname = `${_.get(
       this.state.loggedInUserObj,
       "firstName",
@@ -90,7 +92,9 @@ class DashBoard extends React.Component {
         <div className="container">
           <h1 className="mt-4">HELLO {localUname}</h1>
           {/* <p>Key in your diet here</p> */}
-          <Diet />
+          <Diet 
+            user = {this.state.loggedInUserObj}
+          />
         </div>
         {!this.state.submit ? <Redirect to={`/`} /> : null}
         {this.state.logout ? (

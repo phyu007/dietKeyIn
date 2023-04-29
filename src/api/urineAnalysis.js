@@ -40,3 +40,17 @@ export const insertDummiesPHtemp = async (selectedInfo) => {
   console.log("This is response", response.data.body);
   return response.data.body;
 };
+
+export const getRecommendedDiet = async (urine_ph) => {
+  console.log("This is urinePH", urine_ph)
+  const response = await axiosClient.post("/getRecommendedDiet", urine_ph);
+  console.log("This is response", response.data.body);
+  return response.data.body;
+};
+
+export const updateurineph = async (payload) => {
+  console.log("This is updateurineph payload", payload)
+  const response = await axiosClient.post("/updateurineph", payload);
+  console.log("This is response", response.data.body);
+  return response.data.body;
+};

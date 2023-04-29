@@ -17,7 +17,7 @@ useEffect(() => {
   async function getFamilyMembers() {
     let id = {"account_id": loggedInUserObj.id}
     const response  = await getfamilymembers(id);  
-    console.log("response " , response)
+    console.log("family members " , response)
     setFamilyMem(response);
   
   }
@@ -38,6 +38,7 @@ useEffect(() => {
 if (familyMem && familyMem.length > 0) {
   profiles = familyMem.map((member,index) => ({
     name: member.person_name,
+    id : member.person_id,
     avatar: profiles[index].avatar,
   }));
 }
@@ -46,18 +47,19 @@ if (familyMem && familyMem.length > 0) {
   // handle profile selection
   const handleProfileSelect = (profile) => {
     // save selected profile to localStorage or server
-    console.log(`Selected profile: ${profile.name}`);
+    console.log("Selected profile:",profile);
     console.log("from login " + { userName }, { loggedInUserObj })
     
     const userObj = {
       userName: userName,
       firstName: profile.name,
       isUserLoggedIn: true,
+      person_id : profile.id,
     };
     localStorage.setItem(loggedInUserObj.userName, JSON.stringify(userObj));
     history.push({
       pathname: "/dashboard",
-      state: { userName: loggedInUserObj.userName },
+      state: { userName: loggedInUserObj.userName , user: loggedInUserObj },
     });
   };
 
