@@ -10,7 +10,11 @@ const ToiletUsersPage = () => {
   const location = useLocation();
   //const { userName, loggedInUserObj } = location.state;
   const [familyMem, setFamilyMem] = useState([]);
-  const userName = Cookies.get('UserName');
+  const userName = Cookies.get('UserName'); 
+  if(userName == null){ 
+    console.log("no cookie"); 
+  }
+
   const loggedInUserObj = JSON.parse(Cookies.get('UserObj'));
   console.log("from welcome " , { loggedInUserObj })
   //console.log("account id " +  loggedInUserObj.id)
@@ -50,15 +54,18 @@ if (familyMem && familyMem.length > 0) {
  
   // handle profile selection
   const handleProfileSelect = async ( profile) => {
-   
+    const searchParams = new URLSearchParams(window.location.search);
+         
     // save selected profile to localStorage or server
     console.log(`Selected profile:`);
     console.log(profile);
     console.log("from login " + { userName }, { loggedInUserObj })
-    
+    const deviceid = searchParams.get('deviceid');
+     
     const body = {
       account_id: profile.account_id,
       person_guid: profile.guid,
+      device_id: deviceid
     }; 
 
       try {
@@ -73,10 +80,9 @@ if (familyMem && familyMem.length > 0) {
           };
           localStorage.setItem(loggedInUserObj.userName, JSON.stringify(userObj));
           console.log("toiletUsers loggedInUserObj",loggedInUserObj)
-          const searchParams = new URLSearchParams(window.location.search);
-          const deviceid = searchParams.get('deviceId');
+          
           history.push({
-            pathname: "/toiletDashboard/?deviceId=" + deviceid,
+            pathname: "/toiletDashboard/?deviceid=" + deviceid,
             state: { loggedInUserObj: userObj ,userName: loggedInUserObj.userName },
           });
         } else {
@@ -91,10 +97,9 @@ if (familyMem && familyMem.length > 0) {
         };
         localStorage.setItem(loggedInUserObj.userName, JSON.stringify(userObj));
         console.log("toiletUsers loggedInUserObj",loggedInUserObj)
-        const searchParams = new URLSearchParams(window.location.search);
-        const deviceid = searchParams.get('deviceid');
+       
         history.push({
-          pathname: "/toiletDashboard/?deviceId=" + deviceid,
+          pathname: "/toiletDashboard/?deviceid=" + deviceid,
           state: { loggedInUserObj: userObj ,userName: loggedInUserObj.userName },
         });
       } 
