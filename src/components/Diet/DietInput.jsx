@@ -5,7 +5,7 @@ const DietInput = ({ addDiet }) => {
     const [foodName, setFoodName] = useState('')
     const [quantity, setQuantity] = useState(0)
     const [temperature, setTemperature] = useState(0)
-    const[ initialValues] = useState(data)
+    const [initialValues] = useState(data)
 
 
     const handleFoodNameChange = (event) => { setFoodName(event.target.value) }
@@ -25,34 +25,26 @@ const DietInput = ({ addDiet }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            {/* <input
-                type="text"
-                placeholder='Food name'
-                value={foodName}
-                onChange={handleFoodNameChange}
-            /> */}
-            <select value={foodName} onChange={handleFoodNameChange}>
-                <option value="">Select a food name</option>
-                {Object.keys(initialValues).map((name) => (
-                    <option key={name} value={name}>
-                        {name}
-                    </option>
-                ))}
-            </select>
-            <input
-                type="number"
-                placeholder='Quantity'
-                value={quantity}
-                onChange={handleQuantityChange}
-            />
-            {/* <input
-                type="number"
-                placeholder='Temperature'
-                value={temperature}
-                onChange={handleTempChange}
-            /> */}
-            <input type="submit" text="Add" />
+            <div>
+                <label htmlFor="foodName">Food Name:</label>
+                <select id="foodName" value={foodName} onChange={handleFoodNameChange}>
+                    <option value="">Select a food name</option>
+                    {Object.keys(initialValues).map((name) => (
+                        <option key={name} value={name}>
+                            {name}
+                        </option>
+                    ))}
+                </select>
+            </div>
+            <div>
+                <label htmlFor="quantity">Quantity:</label>
+                <input type="number" id="quantity" placeholder="Quantity" value={quantity} onChange={handleQuantityChange} />
+            </div>
+            <div>
+                <input type="submit" value="Add to Diet" />
+            </div>
         </form>
+
     )
 }
 

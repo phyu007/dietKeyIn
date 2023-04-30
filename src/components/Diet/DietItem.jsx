@@ -9,7 +9,7 @@ const DietItem = ({ diet }) => {
         }}>
             <span>{foodName}</span>
             <span>{quantity}</span>
-            <span>{temperature} Celsius</span>
+            {/* <span>{temperature} Celsius</span> */}
         </div>
     )
 }
