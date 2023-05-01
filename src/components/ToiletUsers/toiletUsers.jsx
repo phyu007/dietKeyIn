@@ -10,7 +10,12 @@ const ToiletUsersPage = () => {
   const location = useLocation();
   //const { userName, loggedInUserObj } = location.state;
   const [familyMem, setFamilyMem] = useState([]);
-  const userName = Cookies.get('UserName');
+  const userName = Cookies.get('UserName'); 
+  if(userName == null){ 
+    console.log("no cookie"); 
+    window.location.replace("https://main.d2c73q3g5x4387.amplifyapp.com/");
+  }
+
   const loggedInUserObj = JSON.parse(Cookies.get('UserObj'));
   console.log("from welcome " , { loggedInUserObj })
   //console.log("account id " +  loggedInUserObj.id)
@@ -50,53 +55,40 @@ if (familyMem && familyMem.length > 0) {
  
   // handle profile selection
   const handleProfileSelect = async ( profile) => {
-   
+    const searchParams = new URLSearchParams(window.location.search);
+         
     // save selected profile to localStorage or server
     console.log(`Selected profile:`);
     console.log(profile);
     console.log("from login " + { userName }, { loggedInUserObj })
-    
+    const deviceid = searchParams.get('deviceid');
+     
     const body = {
       account_id: profile.account_id,
       person_guid: profile.guid,
+      device_id: deviceid
     }; 
 
       try {
-        const response = await insertDummiesPHtemp(body);
-        console.log("This is response", response);
+        const response1 = await insertDummiesPHtemp(body);
+        console.log("This is response from insert dummy", response1);
   
-        if (response.data.statusCode === 200) {
-          console.log("Success logging in",response);
+         
+          console.log("Success logging in",response1);
           const userObj = {
             userName: profile.name,
             isUserLoggedIn: true,
           };
           localStorage.setItem(loggedInUserObj.userName, JSON.stringify(userObj));
           console.log("toiletUsers loggedInUserObj",loggedInUserObj)
-          const searchParams = new URLSearchParams(window.location.search);
-          const deviceid = searchParams.get('deviceId');
+          
           history.push({
-            pathname: "/toiletDashboard/?deviceId=" + deviceid,
+            pathname: "/toiletDashboard/?deviceid=" + deviceid,
             state: { loggedInUserObj: userObj ,userName: loggedInUserObj.userName },
-          });
-        } else {
-          console.error("Error logging in"); 
-  
-        }
+          }); 
       } catch (error) {
         console.error("Error logging in", error); 
-        const userObj = {
-          userName: profile.name,
-          isUserLoggedIn: true,
-        };
-        localStorage.setItem(loggedInUserObj.userName, JSON.stringify(userObj));
-        console.log("toiletUsers loggedInUserObj",loggedInUserObj)
-        const searchParams = new URLSearchParams(window.location.search);
-        const deviceid = searchParams.get('deviceid');
-        history.push({
-          pathname: "/toiletDashboard/?deviceId=" + deviceid,
-          state: { loggedInUserObj: userObj ,userName: loggedInUserObj.userName },
-        });
+        
       } 
   };
 
