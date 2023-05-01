@@ -13,6 +13,7 @@ const ToiletUsersPage = () => {
   const userName = Cookies.get('UserName'); 
   if(userName == null){ 
     console.log("no cookie"); 
+    window.location.replace("https://main.d2c73q3g5x4387.amplifyapp.com/");
   }
 
   const loggedInUserObj = JSON.parse(Cookies.get('UserObj'));
@@ -69,11 +70,11 @@ if (familyMem && familyMem.length > 0) {
     }; 
 
       try {
-        const response = await insertDummiesPHtemp(body);
-        console.log("This is response", response);
+        const response1 = await insertDummiesPHtemp(body);
+        console.log("This is response from insert dummy", response1);
   
-        if (response.data.statusCode === 200) {
-          console.log("Success logging in",response);
+         
+          console.log("Success logging in",response1);
           const userObj = {
             userName: profile.name,
             isUserLoggedIn: true,
@@ -84,24 +85,10 @@ if (familyMem && familyMem.length > 0) {
           history.push({
             pathname: "/toiletDashboard/?deviceid=" + deviceid,
             state: { loggedInUserObj: userObj ,userName: loggedInUserObj.userName },
-          });
-        } else {
-          console.error("Error logging in"); 
-  
-        }
+          }); 
       } catch (error) {
         console.error("Error logging in", error); 
-        const userObj = {
-          userName: profile.name,
-          isUserLoggedIn: true,
-        };
-        localStorage.setItem(loggedInUserObj.userName, JSON.stringify(userObj));
-        console.log("toiletUsers loggedInUserObj",loggedInUserObj)
-       
-        history.push({
-          pathname: "/toiletDashboard/?deviceid=" + deviceid,
-          state: { loggedInUserObj: userObj ,userName: loggedInUserObj.userName },
-        });
+        
       } 
   };
 
