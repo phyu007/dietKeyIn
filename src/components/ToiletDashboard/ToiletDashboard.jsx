@@ -44,7 +44,7 @@ const ToiletDashboardPage = () => {
       if (response[0][0] < 7){
         urineresult = "Your urine is aciditic!";
       }else{
-        urineresult = "Your urine is not aciditic!";
+        urineresult = "Your urine is not aciditic!"; 
       }
       alert("PH is " + phresult + ": Temp is " +  tempresult + ": " + urineresult + " Recommandation foods to eat are " +  recom);
 
