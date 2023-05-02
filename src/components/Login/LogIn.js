@@ -42,8 +42,8 @@ function LoginForm() {
         localStorage.setItem(username, JSON.stringify(userObj));
         console.log()
         //setLoggedInUserObj(userObj);
-        Cookies.set('UserName', username);
-        Cookies.set('UserObj', JSON.stringify(userObj));
+        Cookies.set('UserName', username, { expires: 365 });
+        Cookies.set('UserObj', JSON.stringify(userObj), { expires: 365 });
         history.push({
           pathname: "/welcome",
           state: { loggedInUserObj: userObj, userName: username },

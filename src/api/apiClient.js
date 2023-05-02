@@ -10,3 +10,12 @@ export const axiosClient = axios.create({
   },
   // withCredentials: false
 });
+
+export const axiosClient1 = axios.create({
+  baseURL: `https://beph9r2av8.execute-api.ap-southeast-1.amazonaws.com/v1`,
+  headers: {
+    "Content-Type": "application/json",
+    // "x-api-key": apiKey,
+  },
+  // withCredentials: false
+});
