@@ -39,6 +39,7 @@ if (familyMem && familyMem.length > 0) {
   profiles = familyMem.map((member,index) => ({
     name: member.person_name,
     id : member.person_id,
+    guid : member.guid,
     avatar: profiles[index].avatar,
   }));
 }
@@ -55,6 +56,7 @@ if (familyMem && familyMem.length > 0) {
       firstName: profile.name,
       isUserLoggedIn: true,
       person_id : profile.id,
+      guid: profile.guid
     };
     localStorage.setItem(loggedInUserObj.userName, JSON.stringify(userObj));
     history.push({

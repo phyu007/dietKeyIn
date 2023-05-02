@@ -47,7 +47,7 @@ class DashBoard extends React.Component {
   }
 
   render() {
-    console.log("This is user", this.state.loggedInUserObj)
+    console.log("This is user in dashboard", this.state.loggedserObj)
     const localUname = `${_.get(
       this.state.loggedInUserObj,
       "firstName",

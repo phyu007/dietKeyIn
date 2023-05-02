@@ -9,6 +9,7 @@ const Diet = (props) => {
     const [dietList, setDietList] = useState([])
     const[ initialValues] = useState(data)
     const updatedValues = {...initialValues};
+    console.log("THis is person",props.user.guid)
 
     dietList.forEach(item => {
         if (updatedValues.hasOwnProperty(item.foodName)) {
@@ -39,7 +40,7 @@ const Diet = (props) => {
             if(predictedPH < 7)
             {
                 let response = await getRecommendedDiet(predictedPH)
-                window.alert("Your urine is acidic. We recommend you to have more " + response.recommended_items + " in your diet to balance your pH level.")
+                window.alert("The predicted urine is acidic. We recommend you to test your urine in the smart toilet and to have more " + response.recommended_items + " in your diet to balance your pH level.")
 
             }
             let payload = {
@@ -57,8 +58,16 @@ const Diet = (props) => {
     return (
         <div>
             <DietInput addDiet={addDiet} />
+            <br />
             <DietList dietList={dietList} />
+            <br />
             <button onClick={handleSubmit}>Submit</button>
+            <br />
+            <br />
+            <br />
+            <div>
+                <h3>You can access historical data: <a href={`http://smarttoilet.s3-website-ap-southeast-1.amazonaws.com/index.html?psersonGuid=${props.user.guid}`}>here</a></h3>
+            </div>
         </div>
     )
 }

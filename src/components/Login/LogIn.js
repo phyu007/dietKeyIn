@@ -36,6 +36,7 @@ function LoginForm() {
           firstName: response.data.firstName,
           lastName: response.data.lastName,
           id : response.data.body.id,
+          guid : response.data.body.guid,
           isUserLoggedIn: true,
         };
         localStorage.setItem(username, JSON.stringify(userObj));

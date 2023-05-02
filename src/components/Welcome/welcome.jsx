@@ -22,7 +22,7 @@ useEffect(() => {
 
   // define profiles array (can be fetched from API or database)
   let profiles = [
-    { name: "Toilet Users", avatar: "https://images.unsplash.com/photo-1613743147091-122703615c97?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8dG9pbGV0JTIwdXNlcnMlMjBjYXJ0b29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60" },
+    // { name: "Toilet Users", avatar: "https://images.unsplash.com/photo-1613743147091-122703615c97?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8dG9pbGV0JTIwdXNlcnMlMjBjYXJ0b29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60" },
     { name: "Diet Key In", avatar: "https://images.unsplash.com/photo-1531928351158-2f736078e0a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGRpZXQlMjBwaWN0dXJlJTIwY2FydG9vbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=700&q=60" },
   ];
 
