@@ -41,7 +41,7 @@ const ToiletDashboardPage = () => {
       console.log(response1);
       recom =response1.recommended_items.toString();
       let urineresult = "";
-      if (response[0][0] < 7){
+      if (response[0][0] < 6){
         urineresult = "Your urine is aciditic!";
       }else{
         urineresult = "Your urine is not aciditic!"; 
